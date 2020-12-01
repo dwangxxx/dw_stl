@@ -215,6 +215,7 @@ namespace dw_stl
     }
 
     // move_cat_dispatch的random_access_iterator_tag版本
+    // move操作如果需要有效果，得要类自己实现了右值引用的版本
     template <class RandomIter, class OutputIter>
     OutputIter move_cat_dispatch(RandomIter first, RandomIter last, OutputIter result,
                                   dw_stl::random_access_iterator_tag)

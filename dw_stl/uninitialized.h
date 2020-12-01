@@ -60,7 +60,7 @@ namespace dw_stl
     template <class InputIter, class FrowardIter>
     FrowardIter uninitialized_copy(InputIter first, InputIter last, FrowardIter result)
     {
-        // 判断是否有可以忽略的复制构造函数, 如果有的话就可以直接进行copy
+        // 判断是否有可以忽略的赋值构造函数, 如果有的话就可以直接进行copy
         return dw_stl::uninitialized_copy_dispatch(first, last, result, 
                                             std::is_trivially_copy_assignable<
                                             typename iterator_traits<FrowardIter>::value_type>{});
