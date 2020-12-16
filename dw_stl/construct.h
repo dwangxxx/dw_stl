@@ -48,7 +48,7 @@ namespace dw_stl
     // 析构一个对象
     template <class Ty>
     void destroy_one(Ty*, std::true_type) {}
-
+ 
     template <class Ty>
     void destroy_one(Ty* pointer, std::false_type) 
     {
@@ -70,7 +70,7 @@ namespace dw_stl
             // 析构迭代器指向的对象
             destroy(&*first);
     }
-
+ 
     template <class Ty>
     void destroy(Ty* pointer)
     {
