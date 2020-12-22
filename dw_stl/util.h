@@ -48,6 +48,8 @@ namespace dw_stl
 
     // swap函数, 交换两个数, 使用move语义实现, 节省了三次拷贝构造函数的调用
     // 使用了移动构造
+    // 全局的swap函数
+    // 现在的swap函数都是需要参数具有右值赋值函数和移动拷贝构造函数
     template <class Tp>
     void swap(Tp& lhs, Tp& rhs)
     {

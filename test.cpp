@@ -1,6 +1,7 @@
 #include<iostream>
 #include<alloca.h>
 #include<memory.h>
+#include <vector>
 
 using namespace std;
 
@@ -64,11 +65,32 @@ class Ship:public Base
         }
 };
 
+class Fun
+{
+    int a;
+    int b;
+    int c;
+public:
+    Fun() : a(0), b(0), c(0) {}
+    Fun(Fun& rhs)
+    {
+        cout << "test" << endl;
+    }
+    Fun(Fun&& rhs)
+    {
+        cout << "right" << endl;
+    }
+    void operator=(Fun&& rhs)
+    {
+        cout << "right=" << endl;
+    }
+};
+
+
 int main()
 {
-    Ship s;
-    s.test(10);
-    s.test1();
-    s.test2();
+    Fun a;
+    Fun b;
+    swap(a, b);
     return 0;
 }

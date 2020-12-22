@@ -341,7 +341,9 @@ namespace dw_stl
 
         deque &operator=(std::initializer_list<value_type> ilist)
         {
+            // 首先创建一个临时deque
             deque tmp(ilist);
+            // 然后通过swap函数进行赋值
             swap(tmp);
             return *this;
         }
@@ -970,10 +972,11 @@ namespace dw_stl
         // 首先判断是否是自交换
         if (this != &rhs)
         {
-            mystl::swap(begin_, rhs.begin_);
-            mystl::swap(end_, rhs.end_);
-            mystl::swap(map_, rhs.map_);
-            mystl::swap(map_size_, rhs.map_size_);
+            // 交换两个deque的迭代器和map_即可
+            dw_stl::swap(begin_, rhs.begin_);
+            dw_stl::swap(end_, rhs.end_);
+            dw_stl::swap(map_, rhs.map_);
+            dw_stl::swap(map_size_, rhs.map_size_);
         }
     }
 
