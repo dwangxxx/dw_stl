@@ -334,14 +334,15 @@ namespace dw_stl
         if (this != &rhs)
         {
             const auto len = rhs.size();
-            // 如果等号右边的向量长度大于当前的容量, 则直接进行交换
+            // 如果等号右边的向量长度大于当前的容量,
             if (len > capacity())
             {
+                // 首先创建一个新的临时变量，然后将其与当前的vector进行交换，临时变量会被销毁，同时也就是销毁旧的vector
                 vector tmp(rhs.begin(), rhs.end());
                 // swap函数交换的实际是begin_, end_和cap_
                 swap(tmp);
             }
-            // 如果等号右边的向量长度小于当前容量，则不能使用swap函数
+            // 如果等号右边的向量长度小于当前容量
             else if (size() >= len)
             {
                 // i是一个迭代器
@@ -361,7 +362,7 @@ namespace dw_stl
         return *this;
     }
 
-    // 移动赋值操作符
+    // 移动赋值操作符, 直接将右边的东西移动到左边，然后将右边的东西销毁掉
     template <class T>
     vector<T>& vector<T>::operator=(vector&& rhs) noexcept
     {
@@ -387,6 +388,7 @@ namespace dw_stl
             THROW_LENGTH_ERROR_IF(n > max_size(), "n can not larger than max_size() in vector<T>::reserve(n)");
             const auto old_size = size();
             auto tmp = data_allocator::allocate(n);
+            // 移动数据
             dw_stl::uninitialized_move(begin_, end_, tmp);
             data_allocator::deallocate(begin_, cap_ - begin_);
             begin_ = tmp;

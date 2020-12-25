@@ -23,7 +23,8 @@ uninitialized_move_n(first, n, result);
 - algorithm.h：这个头文件包含了stl的基本算法，本文件中实现的算法均是有赋值操作符(=)的。在uninitialized中的函数(uninitialized_fill, uninitialized_copy等)会调用本文件中的fill、copy等函数。
 - vector.h：本文件实现了容器vector。其中实现了push_back, emplace_back, 移动构造函数, 为vector重载了swap函数等。
 - deque.h: 本文件实现了容器deque。其中实现了push_front, push_back, pop_front, pop_back, front, back, emplace_front, emplace_back等函数，为deque重载了swap函数, 也实现了移动构造函数等。
-
+- stack.h: 实现了stack模板类，底层容器默认使用的是deque，可以显式指定底层容器的类型，可选list。
+- queue.h: 实现了queue模板类，底层容器默认使用的是deuque，可以显式指定底层容器的类型，可选list。此文件还会实现一个priority_queue(优先队列)。
 ## 待完成
 
-- queue, stack, map, multimap, set, multiset.......
+- unordered_set, unordered_map, map, multimap, set, multiset.......

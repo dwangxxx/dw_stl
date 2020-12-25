@@ -86,11 +86,41 @@ public:
     }
 };
 
+class F
+{
+private:
+    int a;
+public:
+    F(int a_) : a(a_) {}
+    void swap(F &rhs)
+    {
+        cout << "inner swap" << endl;
+    }
+    bool operator==(F &rhs)
+    {
+        cout << "inner class" << endl;
+        return a == rhs.a;
+    }
+};
+
+/* 
+void swap(F &lhs, F &rhs)
+{
+    cout << "outer swap" << endl;
+    lhs.swap(rhs);
+} */
+
+template <class T>
+bool operator==(T &lhs, T &rhs)
+{
+    cout << "outer class" << endl;
+    return lhs == rhs;
+}
 
 int main()
 {
-    Fun a;
-    Fun b;
-    swap(a, b);
+    F f1(10);
+    F f2(20);
+    f1.swap(f2);
     return 0;
 }

@@ -602,7 +602,9 @@ namespace dw_stl
             else 
             {
                 iterator mid = rhs.begin() + static_cast<difference_type>(len);
+                // 首先将其复制到原来的空间
                 dw_stl::copy(rhs.begin_, mid, begin_);
+                // 然后从原来空间的最后位置开始插入
                 insert(end_, mid, rhs.end_);
             }
         }
