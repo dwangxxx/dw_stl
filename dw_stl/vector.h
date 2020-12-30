@@ -1,5 +1,5 @@
-#ifndef MYSTL_VECTOR_H_
-#define MYSTL_VECTOR_H_
+#ifndef DW_STL_VECTOR_H_
+#define DW_STL_VECTOR_H_
 
 /*
 这个头文件用于实现模板类 vector<T>
@@ -30,6 +30,7 @@
 #include "allocator.h"
 #include "uninitialized.h"
 #include "algorithm.h"
+#include "algo.h"
 
 namespace dw_stl
 {
@@ -48,7 +49,7 @@ namespace dw_stl
     template <class T>
     class vector
     {
-        static_assert(!std::is_same<bool, T>::value, "vector<bool> is abandoned in mystl");
+        static_assert(!std::is_same<bool, T>::value, "vector<bool> is abandoned in DW_STL");
     public:
         // vector 的嵌套型别定义
         typedef dw_stl::allocator<T>                      allocator_type;
@@ -91,7 +92,7 @@ namespace dw_stl
             dw_stl::is_input_iterator<Iter>::value, int>::type = 0>
         vector(Iter first, Iter last)
         {
-            MYSTL_DEBUG(!(last < first));
+            DW_STL_DEBUG(!(last < first));
             range_init(first, last);
         }
 
@@ -177,12 +178,12 @@ namespace dw_stl
         // 访问元素相关操作(重载操作符[])
         reference operator[](size_type n)
         {
-            MYSTL_DEBUG(n < size());
+            DW_STL_DEBUG(n < size());
             return *(begin_ + n);
         }
         const_reference operator[](size_type n) const
         {
-            MYSTL_DEBUG(n < size());
+            DW_STL_DEBUG(n < size());
             return *(begin_ + n);
         }
         reference at(size_type n)
@@ -198,22 +199,22 @@ namespace dw_stl
 
         reference front()
         {
-            MYSTL_DEBUG(!empty());
+            DW_STL_DEBUG(!empty());
             return *begin_;
         }
         const_reference front() const
         {
-            MYSTL_DEBUG(!empty());
+            DW_STL_DEBUG(!empty());
             return *begin_;
         }
         reference back()
         {
-            MYSTL_DEBUG(!empty());
+            DW_STL_DEBUG(!empty());
             return *(end_ - 1);
         }
         const_reference back() const
         {
-            MYSTL_DEBUG(!empty());
+            DW_STL_DEBUG(!empty());
             return *(end_ - 1);
         }
 
@@ -228,7 +229,7 @@ namespace dw_stl
             dw_stl::is_input_iterator<Iter>::value, int>::type = 0>
         void assign(Iter first, Iter last)
         {
-            MYSTL_DEBUG(!(last < first));
+            DW_STL_DEBUG(!(last < first));
             copy_assign(first, last, iterator_category(first));
         }
 
@@ -259,7 +260,7 @@ namespace dw_stl
 
         iterator insert(const_iterator pos, size_type n, const value_type& value)
         {
-            MYSTL_DEBUG(pos >= begin() && pos <= end());
+            DW_STL_DEBUG(pos >= begin() && pos <= end());
             return fill_insert(const_cast<iterator>(pos), n, value);
         }
 
@@ -267,7 +268,7 @@ namespace dw_stl
             dw_stl::is_input_iterator<Iter>::value, int>::type = 0>
         void insert(const_iterator pos, Iter first, Iter last)
         {
-            MYSTL_DEBUG(pos >= begin() && pos <= end() && !(last < first));
+            DW_STL_DEBUG(pos >= begin() && pos <= end() && !(last < first));
             copy_insert(const_cast<iterator>(pos), first, last);
         }
 
@@ -408,16 +409,16 @@ namespace dw_stl
     // emplace函数，在pos处位置就地构造元素，避免额外的赋值或者移动开销
     template <class T>
     template <class ...Args>
-    typename vector<T>::iterator vector<T>::emplace(const_iterator pos, Args&& ...args)
+    typename vector<T>::iterator vector<T>::emplace(const_iterator pos, Args&&... args)
     {
-        MYSTL_DEBUG(pos >= begin() && pos <= end());
+        DW_STL_DEBUG(pos >= begin() && pos <= end());
         iterator xpos = const_cast<iterator>(pos);
         const size_type n = xpos - begin_;
         // 如果pos在尾部
         if (end_ != cap_ && xpos == end_)
         {
             // 在pos处就地构造元素，避免额外的赋值和移动开销
-            data_allocator::construct(dw_stl::address_of(*end_), dw_stl::forward<Args>(args));
+            data_allocator::construct(dw_stl::address_of(*end_), dw_stl::forward<Args>(args)...);
             ++end_;
         }
         // 如果pos不在尾部
@@ -478,7 +479,7 @@ namespace dw_stl
     template <class T>
     void vector<T>::pop_back()
     {
-        MYSTL_DEBUG(!empty());
+        DW_STL_DEBUG(!empty());
         data_allocator::destroy(end_ - 1);
         --end_;
     }
@@ -487,7 +488,7 @@ namespace dw_stl
     template <class T>
     typename vector<T>::iterator vector<T>::insert(const_iterator pos, const value_type& value)
     {
-        MYSTL_DEBUG(pos >= begin() && pos <= end());
+        DW_STL_DEBUG(pos >= begin() && pos <= end());
         iterator xpos = const_cast<iterator>(pos);
         const size_type n = pos - begin_;
         // 未超出容量且插入位置在end处
@@ -519,7 +520,7 @@ namespace dw_stl
     template <class T>
     typename vector<T>::iterator vector<T>::erase(const_iterator pos)
     {
-        MYSTL_DEBUG(pos >= begin() && pos < end());
+        DW_STL_DEBUG(pos >= begin() && pos < end());
         iterator xpos = begin_ + (pos - begin());
         dw_stl::move(xpos + 1, end_, xpos);
         data_allocator::destroy(end_ - 1);
@@ -531,7 +532,7 @@ namespace dw_stl
     template <class T>
     typename vector<T>::iterator vector<T>::erase(const_iterator first, const_iterator last)
     {
-        MYSTL_DEBUG(first >= begin() && last <= end() && !(last < first));
+        DW_STL_DEBUG(first >= begin() && last <= end() && !(last < first));
         const auto n = first - begin();
         iterator r = begin_ + (first - begin());
         // 只是元素的析构，空间还是存在的
@@ -657,8 +658,8 @@ namespace dw_stl
         }
         // 以1.5倍扩容方式进行扩容
         const size_type new_size = old_size == 0
-            ? mystl::max(add_size, static_cast<size_type>(16))
-            : mystl::max(old_size + old_size / 2, old_size + add_size);
+            ? dw_stl::max(add_size, static_cast<size_type>(16))
+            : dw_stl::max(old_size + old_size / 2, old_size + add_size);
         return new_size;
     }
 
@@ -778,11 +779,11 @@ namespace dw_stl
             data_allocator::construct(dw_stl::address_of(*new_end), value_copy);
             ++new_end;
             // 将pos到end_的元素移动到新区域
-            new_end = dw_stl::uninitialized_move(pos, ens_, new_end);
+            new_end = dw_stl::uninitialized_move(pos, end_, new_end);
         }
         catch (...)
         {
-            data_allocator::deallocator(new_begin, new_size);
+            data_allocator::deallocate(new_begin, new_size);
             throw;
         }
         destroy_and_recover(begin_, end_, cap_ - begin_);
@@ -811,7 +812,7 @@ namespace dw_stl
                 dw_stl::uninitialized_copy(end_ - n, end_, end_);
                 end_ += n;
                 // 将pos到old_end - n处的元素移动到以old_end结尾的位置
-                dw_stl::move_backward(pos, pld_end - n, old_end);
+                dw_stl::move_backward(pos, old_end - n, old_end);
                 dw_stl::uninitialized_fill_n(pos, n, value_copy);
             }
             // 如果从pos到end_的空间不够放下新增元素
@@ -829,7 +830,7 @@ namespace dw_stl
             // 空闲空间不足
             // 扩容
             const auto new_size = get_new_cap(n);
-            auto new_begin = data_allocator:allocate(new_size);
+            auto new_begin = data_allocator::allocate(new_size);
             auto new_end = new_begin;
             try 
             {
@@ -862,7 +863,7 @@ namespace dw_stl
         if ((cap_ - end_) >= n)
         {
             // 如果备用空间大小足够
-            const auto after_elems = end_ -  pos_;
+            const auto after_elems = end_ -  pos;
             auto old_end = end_;
             if (after_elems > n)
             {

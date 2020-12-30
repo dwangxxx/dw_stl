@@ -1,5 +1,5 @@
-#ifndef MYSTL_CONSTRUCT_H_
-#define MYSTL_CONSTRUCT_H_
+#ifndef DW_STL_CONSTRUCT_H_
+#define DW_STL_CONSTRUCT_H_
 
 /*
 这个头文件包含两个函数：
@@ -84,7 +84,7 @@ namespace dw_stl
     {
         // 首先传入iterator_traits萃取迭代器指向的型别
         // 然后判断型别是内置类型还是自定义类型
-        destroy_cat(first, last, std::is_trivially_destructible<typename iterator_traits<first>::value_type>{});
+        destroy_cat(first, last, std::is_trivially_destructible<typename iterator_traits<ForwardIterator>::value_type>{});
     }
 }
 

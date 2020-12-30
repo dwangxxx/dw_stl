@@ -1,5 +1,5 @@
-#ifndef MYSTL_STACK_H_
-#define MYSTL_STACK_H_
+#ifndef DW_STL_STACK_H_
+#define DW_STL_STACK_H_
 
 // 这个头文件包含了一个模板类 stack, 用于实现堆栈
 // 默认使用deque来实现
@@ -84,7 +84,7 @@ namespace dw_stl
         {
             return c.back();
         }
-        const_reference top const
+        const_reference top() const
         {
             return c.back();
         }
@@ -137,7 +137,7 @@ namespace dw_stl
     
     public:
         // 友元函数，因为需要访问类的私有成员, 其余所有操作符都可以用下述的操作符来完成
-        friend bool operator=(const stack &lhs, const stack &rhs)
+        friend bool operator==(const stack &lhs, const stack &rhs)
         {
             return lhs.c == rhs.c;
         }

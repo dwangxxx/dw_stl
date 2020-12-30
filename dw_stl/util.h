@@ -1,5 +1,5 @@
-#ifndef MYSTL_UTIL_H_
-#define MYSTL_UTIL_H_
+#ifndef DW_STL_UTIL_H_
+#define DW_STL_UTIL_H_
 
 // 这个文件包含一些通用工具
 // 包括 move, forward, swap 等函数，以及 pair 等 
@@ -147,7 +147,7 @@ namespace dw_stl
         template <class Other1, class Other2,
             typename std::enable_if<
             std::is_constructible<Ty1, const Other1&>::value &&
-            std::is_constructible<Ty2, const Other&>::value &&
+            std::is_constructible<Ty2, const Other2&>::value &&
             std::is_convertible<const Other1&, Ty1>::value &&
             std::is_convertible<const Other2&, Ty2>::value, int>::type = 0>
         constexpr pair(const pair<Other1, Other2>& other)
@@ -160,7 +160,7 @@ namespace dw_stl
             std::is_constructible<Ty1, const Other1&>::value &&
             std::is_constructible<Ty2, const Other2&>::value &&
             (!std::is_convertible<const Other1&, Ty1>::value ||
-             !std::is_convertible<const Other2&, Ty2>), int>::type = 0>
+             !std::is_convertible<const Other2&, Ty2>::value), int>::type = 0>
         explicit constexpr pair(const pair<Other1, Other2>&& other)
         : first(other.first), second(other.second)
         {}

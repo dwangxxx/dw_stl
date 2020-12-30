@@ -2,7 +2,7 @@
 
 这个项目用于实现C++ STL中的大部分功能，使用C++11编写，**借鉴了部分大佬的代码以及侯捷老师的《STL源码剖析》一书**。
 
-## 完成进度
+# 完成进度
 
 - construct.h：用于进行对象的构造和析构。
 - allocator.g：实现了allocator类，一个简易的空间分配器，包含allocate、deallocate、construct和destroy函数。
@@ -25,6 +25,21 @@ uninitialized_move_n(first, n, result);
 - deque.h: 本文件实现了容器deque。其中实现了push_front, push_back, pop_front, pop_back, front, back, emplace_front, emplace_back等函数，为deque重载了swap函数, 也实现了移动构造函数等。
 - stack.h: 实现了stack模板类，底层容器默认使用的是deque，可以显式指定底层容器的类型，可选list。
 - queue.h: 实现了queue模板类，底层容器默认使用的是deuque，可以显式指定底层容器的类型，可选list。此文件还会实现一个priority_queue(优先队列)。
-## 待完成
+- heap_algo.h: 实现了堆函数push_heap, pop_heap, sort_heap, make_heap等函数。
+
+# 待完成
 
 - unordered_set, unordered_map, map, multimap, set, multiset.......
+
+# 测试
+
+测试在Test文件夹下，当前只是对其正确性以及性能进行简单的测试。
+
+* vector测试
+![vector_test](https://github.com/dwangxxx/dw_stl/blob/master/test_result/vector_test.png)
+* deque测试
+![deque_test](https://github.com/dwangxxx/dw_stl/blob/master/test_result/deque_test.png)
+* queue测试
+![queue_test](https://github.com/dwangxxx/dw_stl/blob/master/test_result/queue_test.png)
+* stack测试
+![stack_test](https://github.com/dwangxxx/dw_stl/blob/master/test_result/stack_test.png)

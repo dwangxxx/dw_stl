@@ -1,5 +1,5 @@
-#ifndef MYSTL_UNINITIALIZED_H_
-#define MYSTL_UNINITIALIZED_H_
+#ifndef DW_STL_UNINITIALIZED_H_
+#define DW_STL_UNINITIALIZED_H_
 
 // 这个头文件用于对未初始化空间构造元素
 
@@ -50,7 +50,7 @@ namespace dw_stl
                 dw_stl::construct(&*cur, *first);
             }
         }
-        catch
+        catch (...)
         {
             for (; result != cur; ++result)
                 dw_stl::destroy(&*result);

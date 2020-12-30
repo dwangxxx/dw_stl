@@ -1,5 +1,5 @@
-#ifndef MYSTL_ALGOBASE_H_
-#define MYSTL_ALGOBASE_H_
+#ifndef DW_STL_ALGOBASE_H_
+#define DW_STL_ALGOBASE_H_
 
 /*
 这个头文件包含了stl的基本算法
@@ -78,7 +78,7 @@ namespace dw_stl
     {
         for (auto n = last - first; n > 0; --n, ++first, ++result)
             *result = *first;
-        return result
+        return result;
     }
 
     // 非内置类型
@@ -471,7 +471,7 @@ namespace dw_stl
 
     // 重载cmp的mismatch版本
     template <class InputIter1, class InputIter2, class Compare>
-    dw_stl::pair<InputIter1, InputIter2> mismatch(InputIter1 first1, InputIter1 last,
+    dw_stl::pair<InputIter1, InputIter2> mismatch(InputIter1 first1, InputIter1 last1,
                                                   InputIter2 first2, Compare cmp)
     {
         while (first1 != last1 && cmp(*first1, *first2))

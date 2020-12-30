@@ -1,5 +1,5 @@
-#ifndef MYSTL_TYPE_TRAITS_H_
-#define MYSTL_TYPE_TRAITS_H_
+#ifndef DW_STL_TYPE_TRAITS_H_
+#define DW_STL_TYPE_TRAITS_H_
 
 // 此头文件用来萃取类型信息
 
@@ -32,7 +32,7 @@ namespace dw_stl
 
     // 是pair类型
     template <class T1, class T2>
-    struct is_pair : dw_stl::_true_type {};
+    struct is_pair<dw_stl::pair<T1, T2>> : dw_stl::_true_type {};
 
 }
 

@@ -1,5 +1,5 @@
-#ifndef MYSTL_ALLOCATOR_H_
-#define MYSTL_ALLOCATOR_H_
+#ifndef DW_STL_ALLOCATOR_H_
+#define DW_STL_ALLOCATOR_H_
 
 /*
 allocator.h

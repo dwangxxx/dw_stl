@@ -1,5 +1,5 @@
-#ifndef MYSTL_QUEUE_H_
-#define MYSTL_QUEUE_H_
+#ifndef DW_STL_QUEUE_H_
+#define DW_STL_QUEUE_H_
 
 /*
 此文件实现了两个模板类
@@ -97,7 +97,7 @@ namespace dw_stl
         // 容量相关操作
         bool empty() const noexcept
         {
-            return e.empty();
+            return c.empty();
         }
         size_type size() const noexcept
         {
@@ -160,7 +160,7 @@ namespace dw_stl
     template <class T, class Sequence>
     bool operator!=(const queue<T, Sequence> &lhs, const queue<T, Sequence> &rhs)
     {
-        return !(lhs == rhs;)
+        return !(lhs == rhs);
     }
 
     template <class T, class Sequence>

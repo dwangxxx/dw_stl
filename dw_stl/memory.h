@@ -1,5 +1,5 @@
-#ifndef MYSTL_MEMORY_H_
-#define MYSTL_MEMORY_H_
+#ifndef DW_STL_MEMORY_H_
+#define DW_STL_MEMORY_H_
 
 // 这个头文件负责更高级的动态内存管理
 // 包含一些基本函数、空间配置器，以及一个模板类 auto_ptr
@@ -93,7 +93,7 @@ namespace dw_stl
     private:
         // 拷贝构造函数
         temporary_buffer(const temporary_buffer&);
-        void operator=(cosnt temporary_buffer&);
+        void operator=(const temporary_buffer&);
     };
 
     // 构造函数
