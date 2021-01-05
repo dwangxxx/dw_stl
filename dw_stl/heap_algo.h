@@ -222,5 +222,7 @@ namespace dw_stl
     {
         dw_stl::make_heap_aux(first, last, distance_type(first), cmp);
     }
+
+    //
 }
 #endif
