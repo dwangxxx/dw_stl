@@ -51,3 +51,7 @@ uninitialized_move_n(first, n, result);
 * stack测试
 
 ![stack_test](https://github.com/dwangxxx/dw_stl/blob/main/test_result/stack_test.png)
+
+* priority_queue测试
+
+![pri_queue_test](https://github.com/dwangxxx/dw_stl/blob/main/test_result/pri_queue_test.png)

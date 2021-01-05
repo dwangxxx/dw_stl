@@ -276,7 +276,7 @@ namespace dw_stl
     DW_STL_TRIVIAL_HASH_FUNC(int)
     DW_STL_TRIVIAL_HASH_FUNC(unsigned int)
     DW_STL_TRIVIAL_HASH_FUNC(long)
-    DW_STL_TRIVIAL_HASH_FUNC(signed long)
+    DW_STL_TRIVIAL_HASH_FUNC(unsigned long)
     DW_STL_TRIVIAL_HASH_FUNC(long long)
     DW_STL_TRIVIAL_HASH_FUNC(unsigned long long)
 
